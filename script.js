@@ -10,8 +10,11 @@ var searchItem = ""
 // Grab a reference to empty div with id #cityHistory
 var cityHistory = $("#cityHistory")
 
-// Create an empty array ?
-var recentSearches = []
+// Create an empty array to be populated with recent searches
+var recentSearchesArr = []
+
+// Create an empty object to be populated with recent searches
+var recentSearchesObj = {}
 
 // Global variable apiKey as a string
 var apiKey = "3a82cc89d61bd71079c6ba07c2e6fc75"
@@ -49,7 +52,7 @@ submitBtn.click(function(event){
         uvIndex(uvLatitude, uvLongitude)
         forecast(searchResult)
         add2RecentSearch();
-        add2LocalStorage(searchResult);
+        // add2LocalStorage();
     })
 })
 
@@ -93,7 +96,8 @@ function forecast(city){
             // newDivWeather.addClass("text-2xl")
             // newDivTemp.addClass("text-2xl")
             // newDivHumidity.addClass("text-2xl")
-            newDivDate.val(dayDate)
+            // newDivDate.text(dayDate)
+            newDivDate.textContent = dayDate
             console.log(dayDate)
             console.log(newDivDate)
 
@@ -107,11 +111,11 @@ function forecast(city){
             var tempId = "day-" + (i+1);
             var targetDiv = document.getElementById(tempId)
             console.log(typeof targetDiv) //returns an object?
-            // targetDiv.text(newDivDate)
+            targetDiv.append(newDivDate)
             // // targetDiv.append(newDivWeather)
             // // targetDiv.append(newDivTemp)
             // // targetDiv.append(newDivHumidity)
-            // forecastDiv.append(targetDiv)
+            forecastDiv.append(targetDiv)
         }
     })
 }
@@ -119,7 +123,8 @@ function forecast(city){
 // This function adds the most recently searched city to the left recent search bar
 function add2RecentSearch() {
     var newBtn = $("<button>")
-    recentSearches.push(searchItem)
+    recentSearchesArr.push(searchItem)
+    // recentSearchesObj.assign({}, recentSearchesArr)
     newBtn.text(searchItem)
     newBtn.addClass("btn py-2 px-2 bg-blue-500 hover:bg-blue-600 focus:outline-none focus:shadow-outline text-white recent-search")
     newBtn.attr("id", searchItem)
@@ -129,9 +134,9 @@ function add2RecentSearch() {
     cityHistory.prepend(newBtn)
 }
 
-function add2LocalStorage(cityName) {
-    var citySearched = localStorage.setItem(recentSearches.length, cityName)
-}
+// function add2LocalStorage() {
+//     localStorage.setItem("cities", JSON.stringify(recentSearchesObj))
+// }
 
 
 function renderSearches() {
