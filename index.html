@@ -36,29 +36,71 @@
 
         <!-- Weather of current city -->
         <div class="row-span-2 col-span-5 m-4" id="cityStats">
-            <!-- <div class="col-12" id="cityStats"> -->
-                <h3 class="text-3xl"><span id="cityName">City</span></h3>
-                <h3 class="text-3xl"><span id="date">Date</span></h3>
-                <h5>Temperature: <span id="temperature"></span></h5>
-                <h5>Humidity: <span id="humidity"></span></h5>
-                <h5>Wind Speed: <span id="wind-speed"></span></h5>
-                <h5>UV Index: <span id="uv-index"></span></h5>
-            <!-- </div> -->
+          <h3 class="text-3xl"><span id="cityName">City</span></h3>
+          <h3 class="text-3xl"><span id="date">Date</span></h3>
+          <h5>Temperature: <span id="temperature"></span></h5>
+          <h5>Humidity: <span id="humidity"></span></h5>
+          <h5>Wind Speed: <span id="wind-speed"></span></h5>
+          <h5>UV Index: <span id="uv-index"></span></h5>
         </div>
-
         
         <!-- 5 day forecast of city -->
         <div class="row-span-4 col-span-5 m-4">     
-          <div class="row">
-            <div class="col-12">
-              <h3>5-Day Forecast</h3>
-            </div>
+          <div class="row-span-2 col-span-5">
+            <h3 class="text-3xl">5-Day Forecast</h3>
           </div>
-          <div class="row">
-            <div class="col-3">Day 1</div>
-            <div class="col-3">Day 2</div>
-            <div class="col-3">Day 3</div>
-            <div class="col-3">Day 4</div>
+    
+          <div class="flex content-around flex-wrap text-3xl" id="forecast">
+            <div class="m-8" id="day-1">
+              <!-- <div class="text-2xl" id="day-1-date">
+              </div>
+              <div class="text-2xl" id="day-1-weather">
+              </div>
+              <div class="text-2xl" id="day-1-temp">
+              </div>
+              <div class="text-2xl" id="day-1-humidity">
+              </div> -->
+            </div>
+            <div class="m-8" id="day-2">
+              <!-- <div class="text-2xl" id="day-2-date">
+              </div>
+              <div class="text-2xl" id="day-2-weather">
+              </div>
+              <div class="text-2xl" id="day-2-temp">
+              </div>
+              <div class="text-2xl" id="day-2-humidity">
+              </div> -->
+            </div>
+            <div class="m-8" id="day-3">
+              <!-- <div class="text-2xl" id="day-3-date">
+              </div>
+              <div class="text-2xl" id="day-3-weather">
+              </div>
+              <div class="text-2xl" id="day-3-temp">
+              </div>
+              <div class="text-2xl" id="day-3-humidity">
+              </div> -->
+            </div>
+            <div class="m-8" id="day-4">
+              <!-- <div class="text-2xl" id="day-4-date">
+              </div>
+              <div class="text-2xl" id="day-4-weather">
+              </div>
+              <div class="text-2xl" id="day-4-temp">
+              </div>
+              <div class="text-2xl" id="day-4-humidity">
+              </div> -->
+            </div>
+            <div class="m-8" id="day-5">
+              <!-- <div class="text-2xl" id="day-5-date">
+              </div>
+              <div class="text-2xl" id="day-5-weather">
+              </div>
+              <div class="text-2xl" id="day-5-temp">
+              </div>
+              <div class="text-2xl" id="day-5-humidity">
+              </div> -->
+            </div>
           </div>
         </div>
 

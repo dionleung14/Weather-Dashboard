@@ -47,10 +47,12 @@ submitBtn.click(function(event){
         humiditySpan.text(cityResult.main.humidity)
         windSpeedSpan.text(cityResult.wind.speed)
         uvIndex(uvLatitude, uvLongitude)
+        forecast(searchResult)
         add2RecentSearch();
         add2LocalStorage(searchResult);
     })
 })
+
 
 // This function populates the uv-index info of the requested city
 function uvIndex(lat, lon){
@@ -63,6 +65,54 @@ function uvIndex(lat, lon){
     }).then(function(uvResult){
         var uvIndexSpan = $("#uv-index")
         uvIndexSpan.text(uvResult.value)
+    })
+}
+
+// This function populates the 5-day forecast of the requested city
+// call: api.openweathermap.org/data/2.5/forecast?q={city name}&appid={your api key}
+function forecast(city){
+    var starterForecastURL = "https://api.openweathermap.org/data/2.5/forecast?q="
+    var queryURLForecast = starterForecastURL + city + "&appid=" + apiKey
+    
+    $.ajax({
+        url:queryURLForecast,
+        method: "GET"
+    }).then(function(forecastResult){
+         var forecastDiv = $("#forecast")
+        for (var i=0; i<5; i++) {
+            var nextDays = forecastResult.list[(8*i)+3]
+            var dayDate = nextDays.dt_txt
+            // var dayWeather = nextDays.weather[0].main
+            // var dayTemp = nextDays.main.temp
+            // var dayHumidity = nextDays.main.humidity
+            var newDivDate = $("<div>")
+            // var newDivWeather = $("<div>")
+            // var newDivTemp = $("<div>")
+            // var newDivHumidity = $("<div>")
+            newDivDate.addClass("text-2xl")
+            // newDivWeather.addClass("text-2xl")
+            // newDivTemp.addClass("text-2xl")
+            // newDivHumidity.addClass("text-2xl")
+            newDivDate.val(dayDate)
+            console.log(dayDate)
+            console.log(newDivDate)
+
+            // var dayEl = $("#day-1")
+            // dayEl.append(newDivDate)
+            // forecastDiv.append(dayEl)
+            
+            // newDivWeather.html(dayWeather)
+            // newDivTemp.html(dayTemp)
+            // newDivHumidity.html(dayHumidity)
+            var tempId = "day-" + (i+1);
+            var targetDiv = document.getElementById(tempId)
+            console.log(typeof targetDiv) //returns an object?
+            // targetDiv.text(newDivDate)
+            // // targetDiv.append(newDivWeather)
+            // // targetDiv.append(newDivTemp)
+            // // targetDiv.append(newDivHumidity)
+            // forecastDiv.append(targetDiv)
+        }
     })
 }
 
