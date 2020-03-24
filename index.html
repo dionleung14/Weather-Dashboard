@@ -20,44 +20,50 @@
         Weather Dashboard
     </div>
 
-    <div class="grid grid-rows-6 grid-cols-4 grid-flow-col">
+    <div class="grid grid-rows-6 grid-cols-8 grid-flow-col">
         <!-- History of searched cities -->
-        <div class="row-span-6 col-span-1 inset-y-0 left-0 bg-light m-4">
+        <div class="row-span-6 col-span-2 inset-y-0 left-0 bg-light m-4">
             <label class="text-xl" for="citySearch">Search for a city</label>
             <form class="my-2">
                 <input class="bg-gray-200 hover:bg-white hover:border gray-300 focus:outline-none focus:bg-white focus:shadow-outline focus:border-gray-300 py-2 px-2" id="citySearch" type="search" placeholder="Seattle, WA" aria-label="Search">
                 <button class="btn py-2 px-2 bg-teal-500 hover:bg-teal-600 focus:outline-none focus:shadow-outline text-white" id="citySearchSubmit" type="submit">Search</button>
             </form>
-            <div id="cityHistory">
+            <div>
                 <p class="text-xl">Recent searches</p>
+                <p id="cityHistory"></p>
             </div>
         </div>
 
         <!-- Weather of current city -->
-        <div class="row-span-2 col-span-3 m-4">
-            <div class="col-12" id="cityStats">
+        <div class="row-span-2 col-span-5 m-4" id="cityStats">
+            <!-- <div class="col-12" id="cityStats"> -->
                 <h3 class="text-3xl"><span id="cityName">City</span></h3>
                 <h3 class="text-3xl"><span id="date">Date</span></h3>
                 <h5>Temperature: <span id="temperature"></span></h5>
                 <h5>Humidity: <span id="humidity"></span></h5>
                 <h5>Wind Speed: <span id="wind-speed"></span></h5>
                 <h5>UV Index: <span id="uv-index"></span></h5>
-            </div>
+            <!-- </div> -->
         </div>
 
+        
         <!-- 5 day forecast of city -->
-        <div class="row-span-4 col-span-3 m-4">     
-            <div class="row">
-                <div class="col-12">
-                    <h3>5-Day Forecast</h3>
-                </div>
+        <div class="row-span-4 col-span-5 m-4">     
+          <div class="row">
+            <div class="col-12">
+              <h3>5-Day Forecast</h3>
             </div>
-            <div class="row">
-                <div class="col-3">Day 1</div>
-                <div class="col-3">Day 2</div>
-                <div class="col-3">Day 3</div>
-                <div class="col-3">Day 4</div>
-            </div>
+          </div>
+          <div class="row">
+            <div class="col-3">Day 1</div>
+            <div class="col-3">Day 2</div>
+            <div class="col-3">Day 3</div>
+            <div class="col-3">Day 4</div>
+          </div>
+        </div>
+
+        <div class="row-span-1 col-span-1 m-4" id="unitToggler">
+          <h1>Toggle me</h1>
         </div>
     </div>
 
@@ -102,6 +108,8 @@
       </form> -->
     
     
+    <!-- Moment.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
     <!-- jQuery javaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
