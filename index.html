@@ -35,8 +35,8 @@
         </div>
 
         <!-- Weather of current city -->
-        <div class="row-span-2 col-span-5 m-4" id="cityStats">
-          <h3 class="text-3xl">City: <span id="cityName"></span></h3>
+        <div class="row-span-2 col-span-3 m-4" id="cityStats">
+          <h3 class="text-3xl">City: <span id="cityName"></span><span id="weatherIcon"></span></h3>
           <h3 class="text-3xl">Date: <span id="date"></span></h3>
           <h5>Temperature: <span id="temperature"></span></h5>
           <h5>Humidity: <span id="humidity"></span></h5>
@@ -51,7 +51,7 @@
           </div>
     
           <div class="flex content-around flex-wrap text-3xl" id="forecast">
-            <div class="m-8" id="day-1">
+            <div class="m-8 forecast-container" id="day-1">
               <div class="text-2xl" id="day-1-date">
               </div>
               <div class="text-2xl" id="day-1-weather">
@@ -61,7 +61,7 @@
               <div class="text-2xl" id="day-1-humidity">
               </div>
             </div>
-            <div class="m-8" id="day-2">
+            <div class="m-8 forecast-container" id="day-2">
               <div class="text-2xl" id="day-2-date">
               </div>
               <div class="text-2xl" id="day-2-weather">
@@ -71,7 +71,7 @@
               <div class="text-2xl" id="day-2-humidity">
               </div>
             </div>
-            <div class="m-8" id="day-3">
+            <div class="m-8 forecast-container" id="day-3">
               <div class="text-2xl" id="day-3-date">
               </div>
               <div class="text-2xl" id="day-3-weather">
@@ -81,7 +81,7 @@
               <div class="text-2xl" id="day-3-humidity">
               </div>
             </div>
-            <div class="m-8" id="day-4">
+            <div class="m-8 forecast-container" id="day-4">
               <div class="text-2xl" id="day-4-date">
               </div>
               <div class="text-2xl" id="day-4-weather">
@@ -91,7 +91,7 @@
               <div class="text-2xl" id="day-4-humidity">
               </div>
             </div>
-            <div class="m-8" id="day-5">
+            <div class="m-8 forecast-container" id="day-5">
               <div class="text-2xl" id="day-5-date">
               </div>
               <div class="text-2xl" id="day-5-weather">
@@ -104,10 +104,35 @@
           </div>
         </div>
 
-        <div class="row-span-1 col-span-1 m-4" id="unitToggler">
-          <h1>Toggle me</h1>
+        <div class="row-span-1 col-span-1 m-4">
+          <div class="md:flex md:items-center mb-6">
+            <label class="md block border-2 font-bold">
+              <select id="unitSelector" class="mr-2 leading-tight" type="select">
+                <option id="imperial" value="imperial">Imperial units</option>
+                <option id="metric" value="metric">Metric units</option>
+              </select>
+             
+          </div>
         </div>
     </div>
+
+
+    
+      <!-- <div class="max-w-sm rounded overflow-hidden shadow-lg">
+  <img class="w-full" src="" alt="Sunset in the mountains">
+  <div class="px-6 py-4">
+    <div class="font-bold text-xl mb-2">The Coldest Sunset</div>
+    <p class="text-gray-700 text-base">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
+    </p>
+  </div>
+  <div class="px-6 py-4">
+    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">#photography</span>
+    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">#travel</span>
+    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">#winter</span>
+  </div>
+</div> -->
+
 
     <!-- <form class="w-full max-w-sm">
         <div class="md:flex md:items-center mb-6">

@@ -6,3 +6,9 @@
     display: block;
     margin: 0.75rem;
 }
+
+.forecast-container {
+    background-color: salmon;
+    width: 10%;
+    /* padding: 2rem; */
+}
