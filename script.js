@@ -1,6 +1,9 @@
 // Grab reference to submit button
 var submitBtn = $("#citySearchSubmit")
 
+// Grab reference to clear button
+var clearBtn = $("#clearBtn")
+
 // Get today's date using moment.js
 var todayDate = moment().format("dddd, D MMMM YYYY")
 
@@ -12,9 +15,6 @@ var cityHistory = $("#cityHistory")
 
 // Create an empty array to be populated with recent searches
 var recentSearchesArr = []
-
-// Create an empty object to be populated with recent searches
-var recentSearchesObj = {}
 
 // Global variable apiKey as a string
 var apiKey = "3a82cc89d61bd71079c6ba07c2e6fc75"
@@ -51,9 +51,16 @@ submitBtn.click(function(event){
         windSpeedSpan.text(cityResult.wind.speed)
         uvIndex(uvLatitude, uvLongitude)
         forecast(searchResult)
-        add2RecentSearch();
-        // add2LocalStorage();
+        add2RecentSearch(searchResult);
+        add2LocalStorage();
     })
+})
+
+// This on-click function clears the recent searches bar
+clearBtn.click(function(event){
+    event.preventDefault()
+    localStorage.removeItem("cities")
+    cityHistory.empty()
 })
 
 
@@ -81,79 +88,50 @@ function forecast(city){
         url:queryURLForecast,
         method: "GET"
     }).then(function(forecastResult){
-         var forecastDiv = $("#forecast")
+        var dayTracker = 1;
         for (var i=0; i<5; i++) {
             var nextDays = forecastResult.list[(8*i)+3]
             var dayDate = nextDays.dt_txt
-            // var dayWeather = nextDays.weather[0].main
-            // var dayTemp = nextDays.main.temp
-            // var dayHumidity = nextDays.main.humidity
-            var newDivDate = $("<div>")
-            // var newDivWeather = $("<div>")
-            // var newDivTemp = $("<div>")
-            // var newDivHumidity = $("<div>")
-            newDivDate.addClass("text-2xl")
-            // newDivWeather.addClass("text-2xl")
-            // newDivTemp.addClass("text-2xl")
-            // newDivHumidity.addClass("text-2xl")
-            // newDivDate.text(dayDate)
-            newDivDate.textContent = dayDate
-            console.log(dayDate)
-            console.log(newDivDate)
-
-            // var dayEl = $("#day-1")
-            // dayEl.append(newDivDate)
-            // forecastDiv.append(dayEl)
-            
-            // newDivWeather.html(dayWeather)
-            // newDivTemp.html(dayTemp)
-            // newDivHumidity.html(dayHumidity)
-            var tempId = "day-" + (i+1);
-            var targetDiv = document.getElementById(tempId)
-            console.log(typeof targetDiv) //returns an object?
-            targetDiv.append(newDivDate)
-            // // targetDiv.append(newDivWeather)
-            // // targetDiv.append(newDivTemp)
-            // // targetDiv.append(newDivHumidity)
-            forecastDiv.append(targetDiv)
+            var dayWeather = nextDays.weather[0].main
+            var dayTemp = nextDays.main.temp
+            var dayHumidity = nextDays.main.humidity
+            $(`#day-${dayTracker}-date`).text(dayDate)
+            $(`#day-${dayTracker}-weather`).text(dayWeather)
+            $(`#day-${dayTracker}-temp`).text(dayTemp)
+            $(`#day-${dayTracker}-humidity`).text(dayHumidity)
+            dayTracker++;
         }
     })
 }
 
+
 // This function adds the most recently searched city to the left recent search bar
-function add2RecentSearch() {
+function add2RecentSearch(city) {
     var newBtn = $("<button>")
-    recentSearchesArr.push(searchItem)
-    // recentSearchesObj.assign({}, recentSearchesArr)
-    newBtn.text(searchItem)
+    recentSearchesArr.push(city)
+    newBtn.text(city)
     newBtn.addClass("btn py-2 px-2 bg-blue-500 hover:bg-blue-600 focus:outline-none focus:shadow-outline text-white recent-search")
-    newBtn.attr("id", searchItem)
+    newBtn.attr("id", city)
     newBtn.on("click", function(){
         (console.log("clicked"))
     })
     cityHistory.prepend(newBtn)
 }
 
-// function add2LocalStorage() {
-//     localStorage.setItem("cities", JSON.stringify(recentSearchesObj))
-// }
-
-
-function renderSearches() {
-    var cityButton = document.getElementById(searchItem)
-    console.log(cityButton)
-//     var savedSearch = localStorage.getItem()
-//     if (savedSearches) {
-//         console.log($(savedSearches))
-//         // $(this).val(savedSearches)
-//     }
-//     add2RecentSearch()
+function add2LocalStorage() {
+    localStorage.setItem("cities", JSON.stringify(recentSearchesArr))
 }
 
-// renderSearches();
+function renderSearches() {
+    var storedSearches = JSON.parse(localStorage.getItem("cities"))
+    if (storedSearches) {
+        for (var j=0; j<storedSearches.length; j++) {
+            add2RecentSearch(storedSearches[j])
+        }
+    }
+}
 
-// Weather url
-// api.openweathermap.org/data/2.5/weather?q={city name}&appid={your api key}
+renderSearches();
 
 // Weather API key: 3a82cc89d61bd71079c6ba07c2e6fc75
 // Weather API key: 04be52fea59c58e48125f0ac059699be
